@@ -6,8 +6,6 @@ import kotlin.collections.ArrayList
 
 
 class CrimeLab {
-    fun getCrime(crimeId: UUID): Crime = crimes.first { it.id == crimeId }
-
     companion object {
         var crimes: MutableList<Crime> = defaultValues()
         private var instance: CrimeLab? = null
@@ -33,6 +31,7 @@ class CrimeLab {
 
             return crimesDefault
         }
-    }
 
+        fun getCrime(crimeId: UUID): Crime = crimes.first { it.id == crimeId }
+    }
 }

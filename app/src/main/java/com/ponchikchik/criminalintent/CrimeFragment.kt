@@ -8,7 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.ponchikchik.criminalintent.data.Crime
+import com.ponchikchik.criminalintent.data.CrimeLab
 import kotlinx.android.synthetic.main.crime_fragment.*
+import java.text.DateFormat
 import java.util.*
 
 class CrimeFragment : Fragment() {
@@ -17,7 +19,7 @@ class CrimeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        crime = Crime()
+        crime = crimeId?.let { CrimeLab.getCrime(it) } ?: Crime()
     }
 
     override fun onCreateView(
@@ -40,7 +42,8 @@ class CrimeFragment : Fragment() {
             override fun afterTextChanged(s: Editable?) {}
         })
 
-        crime_date.text = crime.date.toString()
+        val dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.ENGLISH)
+        crime_date.text = dateFormat.format(crime.date)
         crime_date.isEnabled = false
 
         crime_solved.setOnCheckedChangeListener { _, isChecked ->
@@ -53,10 +56,5 @@ class CrimeFragment : Fragment() {
         args?.let {
             crimeId = UUID.fromString(it.getString("crimeId"))
         }
-    }
-
-
-    companion object {
-        fun newInstance() = CrimeFragment()
     }
 }

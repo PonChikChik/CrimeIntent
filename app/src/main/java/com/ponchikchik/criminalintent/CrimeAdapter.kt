@@ -9,6 +9,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.ponchikchik.criminalintent.data.Crime
+import kotlinx.android.synthetic.main.crime_fragment.*
+import java.text.DateFormat
 import java.util.*
 
 class CrimeAdapter(
@@ -31,9 +33,10 @@ class CrimeAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
+        val dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.ENGLISH)
 
         holder.title.text = item.title
-        holder.date.text = item.date.toLocaleString()
+        holder.date.text = dateFormat.format(item.date)
         holder.crimeClickView.setOnClickListener { onClickCrimeListItem.invoke(item.id, it) }
         holder.isSolvedImageView.visibility = if (item.isSolved) GONE else VISIBLE
     }

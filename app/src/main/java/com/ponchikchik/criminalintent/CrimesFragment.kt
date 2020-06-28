@@ -28,7 +28,7 @@ class CrimesFragment : Fragment() {
                 adapter = CrimeAdapter(
                     crimeList,
                     onClickCrimeListItem = { crimeId: UUID, view ->
-                        val bundle = bundleOf("crimeId" to crimeId)
+                        val bundle = bundleOf("crimeId" to crimeId.toString())
                         view.findNavController().navigate(R.id.crimeFragment, bundle)
                     }
                 )
@@ -36,9 +36,5 @@ class CrimesFragment : Fragment() {
         }
 
         return view
-    }
-
-    companion object {
-        fun newInstance() = CrimesFragment()
     }
 }
