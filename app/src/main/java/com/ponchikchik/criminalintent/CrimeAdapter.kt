@@ -2,11 +2,13 @@ package com.ponchikchik.criminalintent
 
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.ponchikchik.criminalintent.data.Crime
-import java.lang.Error
 import java.util.*
 
 class CrimeAdapter(
@@ -33,6 +35,7 @@ class CrimeAdapter(
         holder.title.text = item.title
         holder.date.text = item.date.toLocaleString()
         holder.crimeClickView.setOnClickListener { onClickCrimeListItem.invoke(item.id, it) }
+        holder.isSolvedImageView.visibility = if (item.isSolved) GONE else VISIBLE
     }
 
     override fun getItemCount(): Int = values.size
@@ -51,6 +54,7 @@ class CrimeAdapter(
         val title: TextView = view.findViewById(R.id.item_title)
         val date: TextView = view.findViewById(R.id.item_date)
         val crimeClickView: View = view.findViewById(R.id.item_crime)
+        val isSolvedImageView: ImageView = view.findViewById(R.id.crime_solved)
     }
 
 

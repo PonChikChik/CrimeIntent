@@ -14,13 +14,13 @@ class CrimeLab {
 
         operator fun get(context: Context): CrimeLab? {
             if (instance == null) {
-                instance = CrimeLab(context)
+                instance = CrimeLab()
             }
 
             return instance
         }
 
-        fun defaultValues(): MutableList<Crime> {
+        private fun defaultValues(): MutableList<Crime> {
             val crimesDefault: MutableList<Crime> = ArrayList()
 
             for (i in 0..100) {
