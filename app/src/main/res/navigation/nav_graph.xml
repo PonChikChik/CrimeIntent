@@ -9,7 +9,11 @@
         android:id="@+id/crimeFragment"
         android:name="com.ponchikchik.criminalintent.CrimeFragment"
         android:label="crime_fragment"
-        tools:layout="@layout/crime_fragment" />
+        tools:layout="@layout/crime_fragment" >
+        <argument
+            android:name="crimeId"
+            app:argType="java.util.UUID" />
+    </fragment>
     <fragment
         android:id="@+id/crimesFragment"
         android:name="com.ponchikchik.criminalintent.CrimesFragment"

@@ -9,9 +9,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.ponchikchik.criminalintent.data.Crime
 import kotlinx.android.synthetic.main.crime_fragment.*
+import java.util.*
 
 class CrimeFragment : Fragment() {
     lateinit var crime: Crime
+    private var crimeId: UUID? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +45,13 @@ class CrimeFragment : Fragment() {
 
         crime_solved.setOnCheckedChangeListener { _, isChecked ->
             crime.isSolved = isChecked
+        }
+    }
+
+    override fun setArguments(args: Bundle?) {
+        super.setArguments(args)
+        args?.let {
+            crimeId = UUID.fromString(it.getString("crimeId"))
         }
     }
 
