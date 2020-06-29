@@ -9,7 +9,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.ponchikchik.criminalintent.data.Crime
-import kotlinx.android.synthetic.main.crime_fragment.*
 import java.text.DateFormat
 import java.util.*
 
@@ -38,7 +37,7 @@ class CrimeAdapter(
         holder.title.text = item.title
         holder.date.text = dateFormat.format(item.date)
         holder.crimeClickView.setOnClickListener { onClickCrimeListItem.invoke(item.id, it) }
-        holder.isSolvedImageView.visibility = if (item.isSolved) GONE else VISIBLE
+        holder.isSolvedImageView.visibility = if (item.isSolved) VISIBLE else GONE
     }
 
     override fun getItemCount(): Int = values.size

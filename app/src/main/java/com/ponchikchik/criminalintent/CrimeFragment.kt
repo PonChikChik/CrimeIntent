@@ -31,6 +31,7 @@ class CrimeFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        val dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.ENGLISH)
 
         crime_title.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -42,9 +43,10 @@ class CrimeFragment : Fragment() {
             override fun afterTextChanged(s: Editable?) {}
         })
 
-        val dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.ENGLISH)
+        crime_title.append(crime.title)
         crime_date.text = dateFormat.format(crime.date)
         crime_date.isEnabled = false
+        crime_solved.isChecked = crime.isSolved
 
         crime_solved.setOnCheckedChangeListener { _, isChecked ->
             crime.isSolved = isChecked
