@@ -1,11 +1,18 @@
 package com.ponchikchik.criminalintent
 
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContract
+import androidx.activity.result.contract.ActivityResultContracts.TakePicture
 import androidx.fragment.app.Fragment
 import com.ponchikchik.criminalintent.data.Crime
 import com.ponchikchik.criminalintent.data.CrimeLab
@@ -45,7 +52,7 @@ class CrimeFragment : Fragment() {
 
         crime_title.append(crime.title)
         crime_date.text = dateFormat.format(crime.date)
-        crime_date.isEnabled = false
+//        crime_date.isEnabled = false
         crime_solved.isChecked = crime.isSolved
 
         crime_solved.setOnCheckedChangeListener { _, isChecked ->
