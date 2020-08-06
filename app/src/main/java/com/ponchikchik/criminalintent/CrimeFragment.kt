@@ -1,18 +1,11 @@
 package com.ponchikchik.criminalintent
 
-import android.app.Activity
-import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.result.contract.ActivityResultContract
-import androidx.activity.result.contract.ActivityResultContracts.TakePicture
 import androidx.fragment.app.Fragment
 import com.ponchikchik.criminalintent.data.Crime
 import com.ponchikchik.criminalintent.data.CrimeLab
@@ -23,6 +16,15 @@ import java.util.*
 class CrimeFragment : Fragment() {
     lateinit var crime: Crime
     private var crimeId: UUID? = null
+    private val dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.ENGLISH)
+
+    private val listener = object : ConfirmationListener {
+        override fun confirmButtonClicked(date: Date) {
+            crime_date.text = dateFormat.format(date)
+        }
+
+        override fun cancelButtonClicked() {}
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +40,6 @@ class CrimeFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.ENGLISH)
 
         crime_title.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -52,11 +53,15 @@ class CrimeFragment : Fragment() {
 
         crime_title.append(crime.title)
         crime_date.text = dateFormat.format(crime.date)
-//        crime_date.isEnabled = false
         crime_solved.isChecked = crime.isSolved
 
         crime_solved.setOnCheckedChangeListener { _, isChecked ->
             crime.isSolved = isChecked
+        }
+
+        crime_date.setOnClickListener {
+            val manager = childFragmentManager
+            DatePickerFragment(crime.date, listener).show(manager, DIALOG_DATE)
         }
     }
 
@@ -65,5 +70,10 @@ class CrimeFragment : Fragment() {
         args?.let {
             crimeId = UUID.fromString(it.getString("crimeId"))
         }
+    }
+
+
+    companion object {
+        private const val DIALOG_DATE: String = "DialogDate"
     }
 }

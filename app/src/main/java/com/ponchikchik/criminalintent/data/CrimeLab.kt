@@ -1,6 +1,5 @@
 package com.ponchikchik.criminalintent.data
 
-import android.content.Context
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -10,7 +9,7 @@ class CrimeLab {
         var crimes: MutableList<Crime> = defaultValues()
         private var instance: CrimeLab? = null
 
-        operator fun get(context: Context): CrimeLab? {
+        fun get(): CrimeLab? {
             if (instance == null) {
                 instance = CrimeLab()
             }
