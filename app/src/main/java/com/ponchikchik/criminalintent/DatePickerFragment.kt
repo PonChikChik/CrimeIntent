@@ -7,12 +7,8 @@ import android.icu.util.Calendar.*
 import android.os.Bundle
 import android.widget.DatePicker
 import androidx.fragment.app.DialogFragment
+import java.time.LocalDate
 import java.util.*
-
-interface ConfirmationListener {
-    fun confirmButtonClicked(date: Date)
-    fun cancelButtonClicked()
-}
 
 class DatePickerFragment(
     private val date: Date,
@@ -40,4 +36,9 @@ class DatePickerFragment(
         super.onCancel(dialog)
         listener.cancelButtonClicked()
     }
+}
+
+interface ConfirmationListener {
+    fun confirmButtonClicked(date: Date)
+    fun cancelButtonClicked()
 }

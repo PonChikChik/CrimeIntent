@@ -51,7 +51,9 @@ class CrimeFragment : Fragment() {
             override fun afterTextChanged(s: Editable?) {}
         })
 
-        crime_title.append(crime.title)
+        crime.title?.let {
+            crime_title.append(it)
+        }
         crime_date.text = dateFormat.format(crime.date)
         crime_solved.isChecked = crime.isSolved
 
