@@ -1,9 +1,11 @@
 package com.ponchikchik.criminalintent
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,9 +34,9 @@ class CrimesFragment : Fragment() {
                 layoutManager = LinearLayoutManager(context)
                 adapter = CrimeAdapter(
                     crimeList,
-                    onClickCrimeListItem = { crimeId: UUID, view ->
+                    onClickCrimeListItem = { crimeId: UUID, _ ->
                         val bundle = bundleOf("crimeId" to crimeId.toString())
-                        view.findNavController().navigate(R.id.crimeFragment, bundle)
+                        findNavController().navigate(R.id.crimeFragment, bundle)
                     }
                 )
             }
