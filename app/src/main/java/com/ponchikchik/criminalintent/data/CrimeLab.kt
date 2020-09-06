@@ -1,7 +1,6 @@
 package com.ponchikchik.criminalintent.data
 
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class CrimeLab {

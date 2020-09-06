@@ -1,11 +1,9 @@
 package com.ponchikchik.criminalintent
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,6 +14,7 @@ import java.util.*
 
 class CrimesFragment : Fragment() {
     private val crimeList = CrimeLab.crimes
+    private val dbHelper = context?.let { CrimeDatabaseHelper(it) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
