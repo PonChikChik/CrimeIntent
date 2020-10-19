@@ -22,7 +22,6 @@ class CrimesViewModel(
             getCrimeListFromDatabase().observeForever {
                 crimesList = it
             }
-//            crime = database.get("184caaa4-08ab-4384-9cce-280f97dc425980f97dc4259")
         }
     }
 
