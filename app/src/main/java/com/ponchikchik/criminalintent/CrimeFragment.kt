@@ -8,10 +8,14 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import com.ponchikchik.criminalintent.data.Crime
 import com.ponchikchik.criminalintent.data.CrimeLab
+import com.ponchikchik.criminalintent.data.database.CrimeDatabase
 import kotlinx.android.synthetic.main.crime_fragment.*
+import kotlinx.coroutines.launch
 import java.text.DateFormat
 import java.text.DateFormat.MEDIUM
 import java.util.*
@@ -22,6 +26,7 @@ class CrimeFragment : Fragment() {
     lateinit var crime: Crime
     private var crimeId: UUID? = null
     private val dateFormat = DateFormat.getDateInstance(MEDIUM, ENGLISH)
+    private lateinit var crimesViewModel: CrimesViewModel
 
     private val listener = object : ConfirmationListener {
         override fun confirmButtonClicked(date: Date) {
@@ -33,8 +38,13 @@ class CrimeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        crime = crimeId?.let { CrimeLab.getCrime(it) } ?: Crime()
+        crime = Crime()
         requireActivity().actionBar?.setDisplayHomeAsUpEnabled(true)
+
+        val application = requireNotNull(this.activity).application
+        val dataSource = CrimeDatabase.getInstance(application).crimeDao
+        val viewModelFactory = CrimesViewModelFactory(dataSource, application)
+        crimesViewModel = ViewModelProvider(this, viewModelFactory).get(CrimesViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -61,7 +71,7 @@ class CrimeFragment : Fragment() {
             override fun afterTextChanged(s: Editable?) {}
         })
 
-        crime.title?.let {
+        crime.title.let {
             crime_title.append(it)
         }
         crime_date.text = dateFormat.format(crime.date)
@@ -75,6 +85,15 @@ class CrimeFragment : Fragment() {
             val manager = childFragmentManager
             DatePickerFragment(crime.date, listener).show(manager, DIALOG_DATE)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+
+//        crimeId?.let { crimesViewModel.getCrimeFromDatabase(it).observeForever {
+//            it
+//        } }
     }
 
     override fun onPause() {

@@ -3,6 +3,7 @@ package com.ponchikchik.criminalintent.data.database
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.ponchikchik.criminalintent.data.Crime
 import java.util.*
 
 @Entity(tableName = "crimes")
@@ -21,4 +22,14 @@ data class CrimeDB(
 
     @ColumnInfo(name = "is_requires_police")
     val isRequiresPolice: Boolean = false
-)
+) {
+    fun toCrime(): Crime {
+        val crime = Crime(UUID.fromString(id))
+        crime.title = title
+        crime.date = date
+        crime.isSolved = isSolved
+        crime.isRequiresPolice = isRequiresPolice
+
+        return crime
+    }
+}

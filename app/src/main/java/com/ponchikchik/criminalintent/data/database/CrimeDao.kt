@@ -15,7 +15,7 @@ interface CrimeDao {
     suspend fun update(crime: CrimeDB)
 
     @Query("SELECT * FROM crimes WHERE id = :id")
-    suspend fun get(id: String): CrimeDB?
+    fun get(id: String): LiveData<CrimeDB?>
 
     @Query("DELETE FROM crimes")
     suspend fun clear()
