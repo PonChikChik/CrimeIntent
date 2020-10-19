@@ -1,11 +1,24 @@
 package com.ponchikchik.criminalintent.data.database
 
-class CrimeDB {
-    companion object CrimeTable {
-        const val TABLE_NAME = "crimes"
-        const val COLUMN_UUID = "uuid"
-        const val COLUMN_TITLE = "title"
-        const val COLUMN_DATE = "date"
-        const val COLUMN_SOLVED = "solved"
-    }
-}
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import java.util.*
+
+@Entity(tableName = "crimes")
+data class CrimeDB(
+    @PrimaryKey
+    val id: String = UUID.randomUUID().toString(),
+
+    @ColumnInfo(name = "title")
+    val title: String = "",
+
+    @ColumnInfo(name = "date")
+    val date: Date = Date(),
+
+    @ColumnInfo(name = "is_solved")
+    val isSolved: Boolean = false,
+
+    @ColumnInfo(name = "is_requires_police")
+    val isRequiresPolice: Boolean = false
+)

@@ -36,7 +36,12 @@ class CrimeAdapter(
 
         holder.title.text = item.title
         holder.date.text = dateFormat.format(item.date)
-        holder.crimeClickView.setOnClickListener { onClickCrimeListItem.invoke(item.id, it) }
+        holder.crimeClickView.setOnClickListener {
+            onClickCrimeListItem.invoke(
+                UUID.fromString(item.id.toString()),
+                it
+            )
+        }
         holder.isSolvedImageView.visibility = if (item.isSolved) VISIBLE else GONE
     }
 

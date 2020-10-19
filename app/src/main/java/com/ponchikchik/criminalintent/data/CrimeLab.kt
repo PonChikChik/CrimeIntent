@@ -16,7 +16,8 @@ class CrimeLab {
             return instance
         }
 
-        fun getCrime(crimeId: UUID): Crime = crimes.first { it.id == crimeId }
+        fun getCrime(crimeId: UUID): Crime =
+            crimes.first { UUID.fromString(it.id.toString()) == crimeId }
 
         fun addCrime(crime: Crime) {
             crimes.add(crime)
