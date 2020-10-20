@@ -40,6 +40,12 @@ class CrimesViewModel(
         }
     }
 
+    fun updateCrime(crimeDB: CrimeDB) {
+        viewModelScope.launch {
+            database.update(crimeDB)
+        }
+    }
+
     init {
         initializeCrimeList()
     }

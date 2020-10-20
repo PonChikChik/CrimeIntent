@@ -30,6 +30,7 @@ class CrimeFragment : Fragment() {
 
     private val listener = object : ConfirmationListener {
         override fun confirmButtonClicked(date: Date) {
+            crime.date = date
             crime_date.text = dateFormat.format(date)
         }
 
@@ -38,7 +39,6 @@ class CrimeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        crime = Crime()
         requireActivity().actionBar?.setDisplayHomeAsUpEnabled(true)
 
         val application = requireNotNull(this.activity).application
@@ -71,12 +71,6 @@ class CrimeFragment : Fragment() {
             override fun afterTextChanged(s: Editable?) {}
         })
 
-        crime.title.let {
-            crime_title.append(it)
-        }
-        crime_date.text = dateFormat.format(crime.date)
-        crime_solved.isChecked = crime.isSolved
-
         crime_solved.setOnCheckedChangeListener { _, isChecked ->
             crime.isSolved = isChecked
         }
@@ -91,9 +85,15 @@ class CrimeFragment : Fragment() {
         super.onResume()
 
 
-//        crimeId?.let { crimesViewModel.getCrimeFromDatabase(it).observeForever {
-//            it
-//        } }
+        crimeId?.let { crimesViewModel.getCrimeFromDatabase(it).observe(this) { crimeDB ->
+            crimeDB?.let {
+                crime = crimeDB.toCrime()
+
+                crime_title.append(crime.title)
+                crime_date.text = dateFormat.format(crime.date)
+                crime_solved.isChecked = crime.isSolved
+            }
+        } }
     }
 
     override fun onPause() {
@@ -102,6 +102,8 @@ class CrimeFragment : Fragment() {
         val activity = activity as? MainActivity
         activity?.supportActionBar?.setDisplayHomeAsUpEnabled(false)
         setHasOptionsMenu(false)
+
+        crimesViewModel.updateCrime(crime.toCrimeDB())
     }
 
     override fun setArguments(args: Bundle?) {
