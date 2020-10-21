@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/crimeFragment"
-        android:name="com.ponchikchik.criminalintent.CrimeFragment"
+        android:name="com.ponchikchik.criminalintent.fragments.CrimeFragment"
         android:label="crime_fragment"
         tools:layout="@layout/crime_fragment" >
         <argument
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/crimesFragment"
-        android:name="com.ponchikchik.criminalintent.CrimesFragment"
+        android:name="com.ponchikchik.criminalintent.fragments.CrimesFragment"
         android:label="fragment_item_crimes"
         tools:layout="@layout/crimes_fragment">
         <action

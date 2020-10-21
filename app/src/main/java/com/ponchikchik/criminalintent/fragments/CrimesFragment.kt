@@ -1,4 +1,4 @@
-package com.ponchikchik.criminalintent
+package com.ponchikchik.criminalintent.fragments
 
 import android.os.Bundle
 import android.view.*
@@ -7,6 +7,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.ponchikchik.criminalintent.CrimeAdapter
+import com.ponchikchik.criminalintent.viewModels.CrimesViewModel
+import com.ponchikchik.criminalintent.viewModels.CrimesViewModelFactory
+import com.ponchikchik.criminalintent.R
 import com.ponchikchik.criminalintent.data.Crime
 import com.ponchikchik.criminalintent.data.database.CrimeDatabase
 import kotlinx.android.synthetic.main.crimes_fragment.*

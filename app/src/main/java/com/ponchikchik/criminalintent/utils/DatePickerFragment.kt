@@ -1,4 +1,4 @@
-package com.ponchikchik.criminalintent
+package com.ponchikchik.criminalintent.utils
 
 import android.app.DatePickerDialog
 import android.app.Dialog
@@ -7,7 +7,6 @@ import android.icu.util.Calendar.*
 import android.os.Bundle
 import android.widget.DatePicker
 import androidx.fragment.app.DialogFragment
-import java.time.LocalDate
 import java.util.*
 
 class DatePickerFragment(

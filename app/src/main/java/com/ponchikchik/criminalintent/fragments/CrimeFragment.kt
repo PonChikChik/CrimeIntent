@@ -1,4 +1,4 @@
-package com.ponchikchik.criminalintent
+package com.ponchikchik.criminalintent.fragments
 
 import android.os.Bundle
 import android.text.Editable
@@ -9,13 +9,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
+import com.ponchikchik.criminalintent.viewModels.CrimesViewModel
+import com.ponchikchik.criminalintent.viewModels.CrimesViewModelFactory
+import com.ponchikchik.criminalintent.MainActivity
+import com.ponchikchik.criminalintent.R
 import com.ponchikchik.criminalintent.data.Crime
-import com.ponchikchik.criminalintent.data.CrimeLab
 import com.ponchikchik.criminalintent.data.database.CrimeDatabase
+import com.ponchikchik.criminalintent.utils.ConfirmationListener
+import com.ponchikchik.criminalintent.utils.DatePickerFragment
 import kotlinx.android.synthetic.main.crime_fragment.*
-import kotlinx.coroutines.launch
 import java.text.DateFormat
 import java.text.DateFormat.MEDIUM
 import java.util.*

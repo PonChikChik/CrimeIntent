@@ -1,4 +1,4 @@
-package com.ponchikchik.criminalintent
+package com.ponchikchik.criminalintent.viewModels
 
 import android.app.Application
 import androidx.lifecycle.ViewModel
